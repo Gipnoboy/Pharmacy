@@ -3,6 +3,7 @@ import java.util.*
 class Order (private var data : Map<String, Int>, private val pharmacistId: String, pharmacy : Pharmacy){ // Order class
     private val id = UUID.randomUUID().toString()
     private var totalPrice = 0.0
+    private fun getId() : String = id
 
     init {
         calculateTotalPrice(pharmacy)
@@ -16,7 +17,7 @@ class Order (private var data : Map<String, Int>, private val pharmacistId: Stri
 
     fun getInfo(pharmacy: Pharmacy){
         println("----------------")
-        println("Order ${id + 1}:")
+        println("Order ${pharmacy.orders.indexOfFirst{it.getId() == id} + 1}:")
         for ((key, value) in data){
             println("$key x $value | ${(pharmacy.products.first{it.name == key}.cost) * value}$")
         }
